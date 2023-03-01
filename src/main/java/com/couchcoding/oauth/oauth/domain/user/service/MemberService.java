@@ -14,6 +14,7 @@ import com.couchcoding.oauth.oauth.domain.user.dao.*;
 import com.couchcoding.oauth.oauth.domain.user.entity.Member;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Collections;
 import java.util.NoSuchElementException;
 
 @Slf4j
@@ -66,6 +67,7 @@ public class MemberService implements UserDetailsService {
                 .email(firebaseToken.getEmail())
                 .name(firebaseToken.getName())
                 .picture(firebaseToken.getPicture())
+                .roles(Collections.singletonList("USER"))
                 .build();
         memberRepository.save(member);
         return member;

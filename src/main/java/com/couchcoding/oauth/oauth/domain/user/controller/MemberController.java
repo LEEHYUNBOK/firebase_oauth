@@ -40,9 +40,6 @@ public class MemberController {
         // 사용자를 등록한다.
         Member registeredUser = memberService.findByUsername(decodedToken.getUid());
         log.info("++++++ " + registeredUser);
-        if (registeredUser != null) {
-            return new MemberDTO(registeredUser);
-        }
 
         return new MemberDTO(registeredUser);
     }
