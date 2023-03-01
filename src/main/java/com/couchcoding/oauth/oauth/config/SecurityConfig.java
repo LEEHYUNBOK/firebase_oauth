@@ -1,6 +1,6 @@
 package com.couchcoding.oauth.oauth.config;
 
-import com.couchcoding.oauth.oauth.domain.user.service.CustomUserService;
+import com.couchcoding.oauth.oauth.domain.user.service.MemberService;
 import com.couchcoding.oauth.oauth.filter.JwtFilter;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -21,7 +21,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(securedEnabled = true, jsr250Enabled = true, prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
-    private CustomUserService userDetailsService;
+    private MemberService userDetailsService;
     
     @Autowired
     private FirebaseAuth firebaseAuth;

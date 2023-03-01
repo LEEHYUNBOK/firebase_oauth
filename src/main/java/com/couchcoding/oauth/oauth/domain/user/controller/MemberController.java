@@ -1,7 +1,7 @@
 package com.couchcoding.oauth.oauth.domain.user.controller;
 
-import com.couchcoding.oauth.oauth.domain.user.entity.CustomUser;
-import com.couchcoding.oauth.oauth.domain.user.service.CustomUserService;
+import com.couchcoding.oauth.oauth.domain.user.entity.Member;
+import com.couchcoding.oauth.oauth.domain.user.service.MemberService;
 import com.couchcoding.oauth.oauth.message.request.RegisterInfo;
 import com.couchcoding.oauth.oauth.message.response.UserInfo;
 import com.couchcoding.oauth.oauth.util.RequestUtil;
@@ -19,11 +19,11 @@ import org.springframework.web.server.ResponseStatusException;
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/users")
-public class UserController {
+public class MemberController {
     @Autowired
     FirebaseAuth firebaseAuth;
     @Autowired
-    private CustomUserService customUserDetailsService;
+    private MemberService customUserDetailsService;
 
     @PostMapping("")
     public UserInfo register(@RequestHeader("Authorization") String authorization,
@@ -38,14 +38,14 @@ public class UserController {
                 "{\"code\":\"INVALID_TOKEN\", \"message\":\"" + e.getMessage() + "\"}");
         }
         // 사용자를 등록한다.
-        CustomUser registeredUser = customUserDetailsService.register(
+        Member registeredUser = customUserDetailsService.register(
             decodedToken.getUid(), decodedToken.getEmail(), registerInfo.getNickname());
         return new UserInfo(registeredUser);
     }
 
     @GetMapping("/me")
     public UserInfo  getUserMe(Authentication authentication) {
-        CustomUser customUser = ((CustomUser) authentication.getPrincipal());
-        return new UserInfo(customUser);
+        Member member = ((Member) authentication.getPrincipal());
+        return new UserInfo(member);
     }
 }

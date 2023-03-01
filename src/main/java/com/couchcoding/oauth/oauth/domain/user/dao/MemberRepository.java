@@ -1,10 +1,10 @@
 package com.couchcoding.oauth.oauth.domain.user.dao;
 
-import com.couchcoding.oauth.oauth.domain.user.entity.CustomUser;
+import com.couchcoding.oauth.oauth.domain.user.entity.Member;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<CustomUser, String> {
+public interface MemberRepository extends JpaRepository<Member, String> {
 }

@@ -1,6 +1,6 @@
 package com.couchcoding.oauth.oauth.message.response;
 
-import com.couchcoding.oauth.oauth.domain.user.entity.CustomUser;
+import com.couchcoding.oauth.oauth.domain.user.entity.Member;
 
 import lombok.Data;
 
@@ -10,9 +10,9 @@ public class UserInfo {
     private String email;
     private String nickname;
 
-    public UserInfo(CustomUser customUser) {
-        this.uid = customUser.getUsername();
-        this.email = customUser.getEmail();
-        this.nickname = customUser.getNickname();
+    public UserInfo(Member member) {
+        this.uid = member.getUsername();
+        this.email = member.getEmail();
+        this.nickname = member.getNickname();
     }
 }

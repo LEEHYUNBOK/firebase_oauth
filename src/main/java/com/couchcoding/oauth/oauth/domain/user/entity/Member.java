@@ -19,7 +19,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @AllArgsConstructor
 @Table(name = "user")
 @Builder
-public class CustomUser implements UserDetails {
+public class Member implements UserDetails {
     @Id
     private String username;
     @Column
