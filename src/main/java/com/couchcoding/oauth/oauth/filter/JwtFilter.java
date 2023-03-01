@@ -51,6 +51,7 @@ public class JwtFilter extends OncePerRequestFilter{
 
         // User를 가져와 SecurityContext에 저장한다.
         try{
+            log.info("@@@@@@@@@@@@@@@@@@@@@");
             UserDetails user = userDetailsService.loadUserByUsername(decodedToken.getUid());
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                     user, null, user.getAuthorities());        
