@@ -21,11 +21,12 @@ public class MemberService implements UserDetailsService {
     }
 
     @Transactional
-    public Member register(String uid, String email, String nickname) {
+    public Member register(String uid, String email, String name, String picture) {
         Member member = Member.builder()
                 .username(uid)
                 .email(email)
-                .nickname(nickname)
+                .name(name)
+                .picture(picture)
                 .build();
         memberRepository.save(member);
         return member;

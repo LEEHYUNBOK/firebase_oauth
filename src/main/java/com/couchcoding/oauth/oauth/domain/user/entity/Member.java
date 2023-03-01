@@ -25,7 +25,10 @@ public class Member implements UserDetails {
     @Column
     private String email;
     @Column
-    private String nickname;
+    private String name;
+
+    @Column
+    private String picture;
 
 
     @Override

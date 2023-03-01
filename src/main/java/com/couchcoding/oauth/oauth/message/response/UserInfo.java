@@ -6,13 +6,15 @@ import lombok.Data;
 
 @Data
 public class UserInfo {
-    private String uid;
+    private String username;
     private String email;
-    private String nickname;
+    private String name;
+    private String picture;
 
     public UserInfo(Member member) {
-        this.uid = member.getUsername();
+        this.username = member.getUsername();
         this.email = member.getEmail();
-        this.nickname = member.getNickname();
+        this.name = member.getName();
+        this.picture = member.getPicture();
     }
 }

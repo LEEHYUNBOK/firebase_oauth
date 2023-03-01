@@ -39,7 +39,7 @@ public class MemberController {
         }
         // 사용자를 등록한다.
         Member registeredUser = customUserDetailsService.register(
-            decodedToken.getUid(), decodedToken.getEmail(), registerInfo.getNickname());
+            decodedToken.getUid(), decodedToken.getEmail(), decodedToken.getName(), decodedToken.getPicture());
         return new UserInfo(registeredUser);
     }
 
