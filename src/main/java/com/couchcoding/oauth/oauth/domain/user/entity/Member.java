@@ -2,25 +2,26 @@ package com.couchcoding.oauth.oauth.domain.user.entity;
 
 import java.util.Collection;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+import com.google.firebase.auth.FirebaseToken;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Getter
-@Setter
-@Entity
-@Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "user")
-@Builder
+@Entity
 public class Member implements UserDetails {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Long id;
+
+    @Column(name = "username", nullable = false, unique = true)
     private String username;
     @Column
     private String email;
@@ -37,6 +38,13 @@ public class Member implements UserDetails {
         return null;
     }
 
+    public void update(FirebaseToken token) {
+        this.username = token.getUid();
+        this.email = token.getEmail();
+        this.name = token.getName();
+        this.picture = token.getPicture();
+    }
+
     @Override
     public String getPassword() {
         return null;
@@ -49,25 +57,21 @@ public class Member implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        // TODO Auto-generated method stub
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        // TODO Auto-generated method stub
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        // TODO Auto-generated method stub
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        // TODO Auto-generated method stub
-        return false;
+        return true;
     }
 }

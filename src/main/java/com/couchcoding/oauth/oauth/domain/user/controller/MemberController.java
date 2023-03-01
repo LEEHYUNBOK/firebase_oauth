@@ -44,13 +44,6 @@ public class MemberController {
             return new MemberDTO(registeredUser);
         }
 
-        registeredUser = memberService.save(
-                decodedToken.getUid(),
-                decodedToken.getEmail(),
-                decodedToken.getName(),
-                decodedToken.getPicture()
-        );
-
         return new MemberDTO(registeredUser);
     }
 

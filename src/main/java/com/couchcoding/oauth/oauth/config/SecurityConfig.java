@@ -4,6 +4,7 @@ import com.couchcoding.oauth.oauth.domain.user.service.MemberService;
 import com.couchcoding.oauth.oauth.filter.JwtFilter;
 import com.google.firebase.auth.FirebaseAuth;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -19,18 +20,20 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, jsr250Enabled = true, prePostEnabled = true)
+@RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired
-    private MemberService userDetailsService;
-    
-    @Autowired
-    private FirebaseAuth firebaseAuth;
 
+    private final MemberService userDetailsService;
+    
+
+    private final FirebaseAuth firebaseAuth;
+
+    private final MemberService memberService;
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .anyRequest().authenticated().and()
-                .addFilterBefore(new JwtFilter(userDetailsService, firebaseAuth),
+                .addFilterBefore(new JwtFilter(memberService, userDetailsService, firebaseAuth),
                      UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling()
                 .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
